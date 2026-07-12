@@ -1,7 +1,10 @@
 use std::{env, path::PathBuf};
 
 fn main() {
-    println!("cargo:rustc-link-search=libsrc/lib");
+    let manifest_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
+    let lib_dir = PathBuf::from(manifest_dir).join("libsrc").join("lib");
+
+    println!("cargo:rustc-link-search={}", lib_dir.display());
     println!("cargo:rustc-link-lib=static=SimConnect");
 
     let handle = std::thread::Builder::new()

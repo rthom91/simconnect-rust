@@ -6,17 +6,12 @@ version = "0.5.0"
 authors = ["Connor T"]
 edition = "2021"
 
-[[example]]
-name = "aircraft_updates_on_change"
-path = "examples/aircraft_updates_on_change/main.rs"
+[dependencies]
+simconnect-fs2020 = { path = "simulators/FS2020", optional = true }
+simconnect-fs2024 = { path = "simulators/FS2024", optional = true }
 
-[[example]]
-name = "aircraft_updates"
-path = "examples/aircraft_updates/main.rs"
-
-[[example]]
-name = "aircraft_inputs"
-path = "examples/aircraft_inputs/main.rs"
-
-[build-dependencies]
-bindgen = "0.72"
+[features]
+default = ["all"]
+fs2020 = ["dep:simconnect-fs2020"]
+fs2024 = ["dep:simconnect-fs2024"]
+all = ["fs2020", "fs2024"]
